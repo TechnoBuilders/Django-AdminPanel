@@ -1,3 +1,4 @@
+from tkinter import CASCADE
 from django.db import models
 
 class RFQReceived(models.Model):
@@ -9,3 +10,10 @@ class RFQReceived(models.Model):
     UOM = models.TextField()
     leadTime = models.DateField()
     remarks = models.TextField()
+
+    def __str__(self) -> str:
+        return self.manufacturer + '-' + self.partNumber
+    
+class ClientQuatation(models.Model):
+    quoteNumber = models.BigAutoField(primary_key=True)
+    partNumber = models.ForeignKey(RFQReceived, on_delete=models.CASCADE)
